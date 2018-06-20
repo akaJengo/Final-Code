@@ -1,0 +1,667 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{DeepDreams}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{from} \PY{n+nn}{io} \PY{k}{import} \PY{n}{BytesIO}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k}{import} \PY{n}{partial}
+        \PY{k+kn}{import} \PY{n+nn}{PIL}\PY{n+nn}{.}\PY{n+nn}{Image}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{clear\PYZus{}output}\PY{p}{,} \PY{n}{Image}\PY{p}{,} \PY{n}{display}\PY{p}{,} \PY{n}{HTML}
+        
+        \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        
+        \PY{n}{model\PYZus{}fn} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/michaelwisniewski/desktop/PythonProjects/DeepLearning/GoogleDream/tensorflow\PYZus{}inception\PYZus{}graph.pb}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{graph} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Graph}\PY{p}{(}\PY{p}{)}
+        \PY{n}{sess} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{InteractiveSession}\PY{p}{(}\PY{n}{graph}\PY{o}{=}\PY{n}{graph}\PY{p}{)}
+        
+        \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{gfile}\PY{o}{.}\PY{n}{FastGFile}\PY{p}{(}\PY{n}{model\PYZus{}fn}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{graph\PYZus{}def} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{GraphDef}\PY{p}{(}\PY{p}{)}
+            \PY{n}{graph\PYZus{}def}\PY{o}{.}\PY{n}{ParseFromString}\PY{p}{(}\PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{t\PYZus{}input} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} define the input tensor}
+        \PY{n}{imagenet\PYZus{}mean} \PY{o}{=} \PY{l+m+mf}{117.0}
+        \PY{n}{t\PYZus{}preprocessed} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{t\PYZus{}input}\PY{o}{\PYZhy{}}\PY{n}{imagenet\PYZus{}mean}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{tf}\PY{o}{.}\PY{n}{import\PYZus{}graph\PYZus{}def}\PY{p}{(}\PY{n}{graph\PYZus{}def}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{input}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{t\PYZus{}preprocessed}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{layers} \PY{o}{=} \PY{p}{[}\PY{n}{op}\PY{o}{.}\PY{n}{name} \PY{k}{for} \PY{n}{op} \PY{o+ow}{in} \PY{n}{graph}\PY{o}{.}\PY{n}{get\PYZus{}operations}\PY{p}{(}\PY{p}{)} \PY{k}{if} \PY{n}{op}\PY{o}{.}\PY{n}{type}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Conv2D}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{import/}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{op}\PY{o}{.}\PY{n}{name}\PY{p}{]}
+        \PY{n}{feature\PYZus{}nums} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{graph}\PY{o}{.}\PY{n}{get\PYZus{}tensor\PYZus{}by\PYZus{}name}\PY{p}{(}\PY{n}{name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get\PYZus{}shape}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{n}{layers}\PY{p}{]}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of layers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{layers}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total number of feature channels:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{feature\PYZus{}nums}\PY{p}{)}\PY{p}{)}
+        
+        
+        
+        \PY{k}{def} \PY{n+nf}{strip\PYZus{}consts}\PY{p}{(}\PY{n}{graph\PYZus{}def}\PY{p}{,} \PY{n}{max\PYZus{}const\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Strip large constant values from graph\PYZus{}def.\PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{strip\PYZus{}def} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{GraphDef}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{n0} \PY{o+ow}{in} \PY{n}{graph\PYZus{}def}\PY{o}{.}\PY{n}{node}\PY{p}{:}
+                \PY{n}{n} \PY{o}{=} \PY{n}{strip\PYZus{}def}\PY{o}{.}\PY{n}{node}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{p}{)} 
+                \PY{n}{n}\PY{o}{.}\PY{n}{MergeFrom}\PY{p}{(}\PY{n}{n0}\PY{p}{)}
+                
+                \PY{k}{if} \PY{n}{n}\PY{o}{.}\PY{n}{op} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Const}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                    \PY{n}{tensor} \PY{o}{=} \PY{n}{n}\PY{o}{.}\PY{n}{attr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tensor}
+                    \PY{n}{size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{tensor}\PY{o}{.}\PY{n}{tensor\PYZus{}content}\PY{p}{)}
+                    
+                    \PY{k}{if} \PY{n}{size} \PY{o}{\PYZgt{}} \PY{n}{max\PYZus{}const\PYZus{}size}\PY{p}{:}
+                        \PY{n}{tensor}\PY{o}{.}\PY{n}{tensor\PYZus{}content} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{compat}\PY{o}{.}\PY{n}{as\PYZus{}bytes}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZlt{}stripped }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ bytes\PYZgt{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{size})
+            \PY{k}{return} \PY{n}{strip\PYZus{}def}
+          
+        \PY{k}{def} \PY{n+nf}{rename\PYZus{}nodes}\PY{p}{(}\PY{n}{graph\PYZus{}def}\PY{p}{,} \PY{n}{rename\PYZus{}func}\PY{p}{)}\PY{p}{:}
+            \PY{n}{res\PYZus{}def} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{GraphDef}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{n0} \PY{o+ow}{in} \PY{n}{graph\PYZus{}def}\PY{o}{.}\PY{n}{node}\PY{p}{:}
+                \PY{n}{n} \PY{o}{=} \PY{n}{res\PYZus{}def}\PY{o}{.}\PY{n}{node}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{p}{)} 
+                \PY{n}{n}\PY{o}{.}\PY{n}{MergeFrom}\PY{p}{(}\PY{n}{n0}\PY{p}{)}
+                \PY{n}{n}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{rename\PYZus{}func}\PY{p}{(}\PY{n}{n}\PY{o}{.}\PY{n}{name}\PY{p}{)}
+                
+                \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{s} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{n}\PY{o}{.}\PY{n}{input}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{n}\PY{o}{.}\PY{n}{input}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{rename\PYZus{}func}\PY{p}{(}\PY{n}{s}\PY{p}{)} \PY{k}{if} \PY{n}{s}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{rename\PYZus{}func}\PY{p}{(}\PY{n}{s}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{res\PYZus{}def}
+          
+        \PY{k}{def} \PY{n+nf}{show\PYZus{}graph}\PY{p}{(}\PY{n}{graph\PYZus{}def}\PY{p}{,} \PY{n}{max\PYZus{}const\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Visualize TensorFlow graph.\PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{k}{if} \PY{n+nb}{hasattr}\PY{p}{(}\PY{n}{graph\PYZus{}def}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{as\PYZus{}graph\PYZus{}def}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{graph\PYZus{}def} \PY{o}{=} \PY{n}{graph\PYZus{}def}\PY{o}{.}\PY{n}{as\PYZus{}graph\PYZus{}def}\PY{p}{(}\PY{p}{)}
+            \PY{n}{strip\PYZus{}def} \PY{o}{=} \PY{n}{strip\PYZus{}consts}\PY{p}{(}\PY{n}{graph\PYZus{}def}\PY{p}{,} \PY{n}{max\PYZus{}const\PYZus{}size}\PY{o}{=}\PY{n}{max\PYZus{}const\PYZus{}size}\PY{p}{)}
+            \PY{n}{code} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{        \PYZlt{}script\PYZgt{}}
+        \PY{l+s+s2}{          function load() }\PY{l+s+s2}{\PYZob{}\PYZob{}}
+        \PY{l+s+s2}{            document.getElementById(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}id\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{).pbtxt = }\PY{l+s+si}{\PYZob{}data\PYZcb{}}\PY{l+s+s2}{;}
+        \PY{l+s+s2}{          \PYZcb{}\PYZcb{}}
+        \PY{l+s+s2}{        \PYZlt{}/script\PYZgt{}}
+        \PY{l+s+s2}{        \PYZlt{}link rel=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{import}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ href=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://tensorboard.appspot.com/tf\PYZhy{}graph\PYZhy{}basic.build.html}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ onload=load()\PYZgt{}}
+        \PY{l+s+s2}{        \PYZlt{}div style=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{height:600px}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{}}
+        \PY{l+s+s2}{          \PYZlt{}tf\PYZhy{}graph\PYZhy{}basic id=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}id\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{}\PYZlt{}/tf\PYZhy{}graph\PYZhy{}basic\PYZgt{}}
+        \PY{l+s+s2}{        \PYZlt{}/div\PYZgt{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n+nb}{repr}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{strip\PYZus{}def}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{id}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{graph}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+            \PY{n}{iframe} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{        \PYZlt{}iframe seamless style=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{width:800px;height:620px;border:0}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ srcdoc=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{}\PYZlt{}/iframe\PYZgt{}}
+        \PY{l+s+s2}{    }\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{code}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZam{}quot;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+            \PY{n}{display}\PY{p}{(}\PY{n}{HTML}\PY{p}{(}\PY{n}{iframe}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Visualizing the network graph. Be sure expand the \PYZdq{}mixed\PYZdq{} nodes to see their }
+        \PY{c+c1}{\PYZsh{} internal structure. We are going to visualize \PYZdq{}Conv2D\PYZdq{} nodes.}
+        \PY{n}{tmp\PYZus{}def} \PY{o}{=} \PY{n}{rename\PYZus{}nodes}\PY{p}{(}\PY{n}{graph\PYZus{}def}\PY{p}{,} \PY{k}{lambda} \PY{n}{s}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{s}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{show\PYZus{}graph}\PY{p}{(}\PY{n}{tmp\PYZus{}def}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Picking some internal layer. Note that we use outputs before applying the ReLU nonlinearity}
+        \PY{c+c1}{\PYZsh{} to have non\PYZhy{}zero gradients for features with negative initial activations.}
+        \PY{n}{layer} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mixed4d\PYZus{}3x3\PYZus{}bottleneck\PYZus{}pre\PYZus{}relu}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{channel} \PY{o}{=} \PY{l+m+mi}{139} \PY{c+c1}{\PYZsh{} picking some feature channel to visualize}
+        
+        \PY{c+c1}{\PYZsh{} start with a gray image with a little noise}
+        \PY{n}{img\PYZus{}noise} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{,}\PY{l+m+mi}{224}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{100.0}
+        
+        \PY{k}{def} \PY{n+nf}{showarray}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jpeg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{255}\PY{p}{)}
+            \PY{n}{f} \PY{o}{=} \PY{n}{BytesIO}\PY{p}{(}\PY{p}{)}
+            \PY{n}{PIL}\PY{o}{.}\PY{n}{Image}\PY{o}{.}\PY{n}{fromarray}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{p}{,} \PY{n}{fmt}\PY{p}{)}
+            \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{f}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+        \PY{k}{def} \PY{n+nf}{visstd}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Normalize the image range for visualization\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{k}{return} \PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{a}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n+nb}{max}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{o}{*}\PY{n}{s} \PY{o}{+} \PY{l+m+mf}{0.5}
+        
+        \PY{k}{def} \PY{n+nf}{T}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Helper for getting layer output tensor\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{k}{return} \PY{n}{graph}\PY{o}{.}\PY{n}{get\PYZus{}tensor\PYZus{}by\PYZus{}name}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{import/}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{:0}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{layer})
+        
+        \PY{k}{def} \PY{n+nf}{render\PYZus{}naive}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{,} \PY{n}{img0}\PY{o}{=}\PY{n}{img\PYZus{}noise}\PY{p}{,} \PY{n}{iter\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{step}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{:}
+            \PY{n}{t\PYZus{}score} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{)} \PY{c+c1}{\PYZsh{} defining the optimization objective}
+            \PY{n}{t\PYZus{}grad} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gradients}\PY{p}{(}\PY{n}{t\PYZus{}score}\PY{p}{,} \PY{n}{t\PYZus{}input}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} behold the power of automatic differentiation!}
+            
+            \PY{n}{img} \PY{o}{=} \PY{n}{img0}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iter\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{g}\PY{p}{,} \PY{n}{score} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{t\PYZus{}grad}\PY{p}{,} \PY{n}{t\PYZus{}score}\PY{p}{]}\PY{p}{,} \PY{p}{\PYZob{}}\PY{n}{t\PYZus{}input}\PY{p}{:}\PY{n}{img}\PY{p}{\PYZcb{}}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} normalizing the gradient, so the same step size should work }
+                \PY{n}{g} \PY{o}{/}\PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{1e\PYZhy{}8}         \PY{c+c1}{\PYZsh{} for different layers and networks}
+                \PY{n}{img} \PY{o}{+}\PY{o}{=} \PY{n}{g}\PY{o}{*}\PY{n}{step}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{score}\PY{p}{,} \PY{n}{end} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{p}{)}
+            \PY{n}{showarray}\PY{p}{(}\PY{n}{visstd}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{render\PYZus{}naive}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{channel}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{tffunc}\PY{p}{(}\PY{o}{*}\PY{n}{argtypes}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Helper that transforms TF\PYZhy{}graph generating function into a regular one.}
+        \PY{l+s+sd}{    See \PYZdq{}resize\PYZdq{} function below.}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{placeholders} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{,} \PY{n}{argtypes}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{wrap}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{:}
+                \PY{n}{out} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{o}{*}\PY{n}{placeholders}\PY{p}{)}
+                
+                \PY{k}{def} \PY{n+nf}{wrapper}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kw}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{n}{out}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{placeholders}\PY{p}{,} \PY{n}{args}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{session}\PY{o}{=}\PY{n}{kw}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{session}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return} \PY{n}{wrapper}
+            \PY{k}{return} \PY{n}{wrap}
+        
+        \PY{c+c1}{\PYZsh{} Helper function that uses TF to resize an image}
+        \PY{k}{def} \PY{n+nf}{resize}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{size}\PY{p}{)}\PY{p}{:}
+            \PY{n}{img} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{return} \PY{n}{tf}\PY{o}{.}\PY{n}{image}\PY{o}{.}\PY{n}{resize\PYZus{}bilinear}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{size}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        \PY{n}{resize} \PY{o}{=} \PY{n}{tffunc}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}\PY{p}{(}\PY{n}{resize}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{calc\PYZus{}grad\PYZus{}tiled}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{t\PYZus{}grad}\PY{p}{,} \PY{n}{tile\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{512}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Compute the value of tensor t\PYZus{}grad over the image in a tiled way.}
+        \PY{l+s+sd}{    Random shifts are applied to the image to blur tile boundaries over }
+        \PY{l+s+sd}{    multiple iterations.\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{sz} \PY{o}{=} \PY{n}{tile\PYZus{}size}
+            \PY{n}{h}\PY{p}{,} \PY{n}{w} \PY{o}{=} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{n}{sx}\PY{p}{,} \PY{n}{sy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{n}{sz}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{img\PYZus{}shift} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{roll}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{roll}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{sx}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{sy}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{grad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{h}\PY{o}{\PYZhy{}}\PY{n}{sz}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sz}\PY{p}{)}\PY{p}{,}\PY{n}{sz}\PY{p}{)}\PY{p}{:}
+                
+                \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{w}\PY{o}{\PYZhy{}}\PY{n}{sz}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sz}\PY{p}{)}\PY{p}{,}\PY{n}{sz}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{sub} \PY{o}{=} \PY{n}{img\PYZus{}shift}\PY{p}{[}\PY{n}{y}\PY{p}{:}\PY{n}{y}\PY{o}{+}\PY{n}{sz}\PY{p}{,}\PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{o}{+}\PY{n}{sz}\PY{p}{]}
+                    \PY{n}{g} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{t\PYZus{}grad}\PY{p}{,} \PY{p}{\PYZob{}}\PY{n}{t\PYZus{}input}\PY{p}{:}\PY{n}{sub}\PY{p}{\PYZcb{}}\PY{p}{)}
+                    \PY{n}{grad}\PY{p}{[}\PY{n}{y}\PY{p}{:}\PY{n}{y}\PY{o}{+}\PY{n}{sz}\PY{p}{,}\PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{o}{+}\PY{n}{sz}\PY{p}{]} \PY{o}{=} \PY{n}{g}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{roll}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{roll}\PY{p}{(}\PY{n}{grad}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{sx}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{sy}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{render\PYZus{}multiscale}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{,} \PY{n}{img0}\PY{o}{=}\PY{n}{img\PYZus{}noise}\PY{p}{,} \PY{n}{iter\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{step}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{octave\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{octave\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{t\PYZus{}score} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{)} \PY{c+c1}{\PYZsh{} defining the optimization objective}
+            \PY{n}{t\PYZus{}grad} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gradients}\PY{p}{(}\PY{n}{t\PYZus{}score}\PY{p}{,} \PY{n}{t\PYZus{}input}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} behold the power of automatic differentiation!}
+            
+            \PY{n}{img} \PY{o}{=} \PY{n}{img0}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{octave} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{octave\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{octave}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{hw} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{octave\PYZus{}scale}
+                    \PY{n}{img} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{(}\PY{n}{hw}\PY{p}{)}\PY{p}{)}
+                
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iter\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{g} \PY{o}{=} \PY{n}{calc\PYZus{}grad\PYZus{}tiled}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{t\PYZus{}grad}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{} normalizing the gradient, so the same step size should work }
+                    \PY{n}{g} \PY{o}{/}\PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{1e\PYZhy{}8}         \PY{c+c1}{\PYZsh{} for different layers and networks}
+                    \PY{n}{img} \PY{o}{+}\PY{o}{=} \PY{n}{g}\PY{o}{*}\PY{n}{step}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{end} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{p}{)}
+                \PY{n}{showarray}\PY{p}{(}\PY{n}{visstd}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{render\PYZus{}multiscale}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{channel}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{outer}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+        \PY{n}{k5x5} \PY{o}{=} \PY{n}{k}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}\PY{o}{/}\PY{n}{k}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{lap\PYZus{}split}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Split the image into lo and hi frequency components\PYZsq{}\PYZsq{}\PYZsq{}}
+            
+            \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{name\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{split}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{lo} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{k5x5}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{lo2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d\PYZus{}transpose}\PY{p}{(}\PY{n}{lo}\PY{p}{,} \PY{n}{k5x5}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{hi} \PY{o}{=} \PY{n}{img}\PY{o}{\PYZhy{}}\PY{n}{lo2}
+            \PY{k}{return} \PY{n}{lo}\PY{p}{,} \PY{n}{hi}
+        
+        \PY{k}{def} \PY{n+nf}{lap\PYZus{}split\PYZus{}n}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Build Laplacian pyramid with n splits\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{levels} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{img}\PY{p}{,} \PY{n}{hi} \PY{o}{=} \PY{n}{lap\PYZus{}split}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+                \PY{n}{levels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hi}\PY{p}{)}
+            \PY{n}{levels}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+            \PY{k}{return} \PY{n}{levels}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{lap\PYZus{}merge}\PY{p}{(}\PY{n}{levels}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Merge Laplacian pyramid\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{img} \PY{o}{=} \PY{n}{levels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{hi} \PY{o+ow}{in} \PY{n}{levels}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{:}
+                \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{name\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{merge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{img} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{conv2d\PYZus{}transpose}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{k5x5}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{hi}\PY{p}{)}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{hi}
+            \PY{k}{return} \PY{n}{img}
+        
+        \PY{k}{def} \PY{n+nf}{normalize\PYZus{}std}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{eps}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}10}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Normalize image by making its standard deviation = 1.0\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{name\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{normalize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n}{std} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{k}{return} \PY{n}{img}\PY{o}{/}\PY{n}{tf}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{std}\PY{p}{,} \PY{n}{eps}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{lap\PYZus{}normalize}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{scale\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Perform the Laplacian pyramid normalization.\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{img} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{expand\PYZus{}dims}\PY{p}{(}\PY{n}{img}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{tlevels} \PY{o}{=} \PY{n}{lap\PYZus{}split\PYZus{}n}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{scale\PYZus{}n}\PY{p}{)}
+            \PY{n}{tlevels} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{normalize\PYZus{}std}\PY{p}{,} \PY{n}{tlevels}\PY{p}{)}\PY{p}{)}
+            \PY{n}{out} \PY{o}{=} \PY{n}{lap\PYZus{}merge}\PY{p}{(}\PY{n}{tlevels}\PY{p}{)}
+            \PY{k}{return} \PY{n}{out}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Showing the lap\PYZus{}normalize graph with TensorBoard}
+        \PY{n}{lap\PYZus{}graph} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Graph}\PY{p}{(}\PY{p}{)}
+        \PY{k}{with} \PY{n}{lap\PYZus{}graph}\PY{o}{.}\PY{n}{as\PYZus{}default}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{lap\PYZus{}in} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lap\PYZus{}in}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{lap\PYZus{}out} \PY{o}{=} \PY{n}{lap\PYZus{}normalize}\PY{p}{(}\PY{n}{lap\PYZus{}in}\PY{p}{)}
+        \PY{n}{show\PYZus{}graph}\PY{p}{(}\PY{n}{lap\PYZus{}graph}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{render\PYZus{}lapnorm}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{,} \PY{n}{img0}\PY{o}{=}\PY{n}{img\PYZus{}noise}\PY{p}{,} \PY{n}{visfunc}\PY{o}{=}\PY{n}{visstd}\PY{p}{,}
+                           \PY{n}{iter\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{step}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{octave\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{octave\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{,} \PY{n}{lap\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{t\PYZus{}score} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{)} \PY{c+c1}{\PYZsh{} defining the optimization objective}
+            \PY{n}{t\PYZus{}grad} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gradients}\PY{p}{(}\PY{n}{t\PYZus{}score}\PY{p}{,} \PY{n}{t\PYZus{}input}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} behold the power of automatic differentiation!}
+            \PY{c+c1}{\PYZsh{} build the laplacian normalization graph}
+            \PY{n}{lap\PYZus{}norm\PYZus{}func} \PY{o}{=} \PY{n}{tffunc}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}\PY{p}{(}\PY{n}{partial}\PY{p}{(}\PY{n}{lap\PYZus{}normalize}\PY{p}{,} \PY{n}{scale\PYZus{}n}\PY{o}{=}\PY{n}{lap\PYZus{}n}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{img} \PY{o}{=} \PY{n}{img0}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{octave} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{octave\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{octave}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{hw} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{octave\PYZus{}scale}
+                    \PY{n}{img} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{(}\PY{n}{hw}\PY{p}{)}\PY{p}{)}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iter\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{g} \PY{o}{=} \PY{n}{calc\PYZus{}grad\PYZus{}tiled}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{t\PYZus{}grad}\PY{p}{)}
+                    \PY{n}{g} \PY{o}{=} \PY{n}{lap\PYZus{}norm\PYZus{}func}\PY{p}{(}\PY{n}{g}\PY{p}{)}
+                    \PY{n}{img} \PY{o}{+}\PY{o}{=} \PY{n}{g}\PY{o}{*}\PY{n}{step}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{end} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{p}{)}
+                \PY{n}{showarray}\PY{p}{(}\PY{n}{visfunc}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{render\PYZus{}lapnorm}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{channel}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_0_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{render\PYZus{}lapnorm}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{65}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{render\PYZus{}lapnorm}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mixed3b\PYZus{}1x1\PYZus{}pre\PYZus{}relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{101}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{render\PYZus{}lapnorm}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{65}\PY{p}{]}\PY{o}{+}\PY{n}{T}\PY{p}{(}\PY{n}{layer}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{139}\PY{p}{]}\PY{p}{,} \PY{n}{octave\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{render\PYZus{}deepdream}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{,} \PY{n}{img0}\PY{o}{=}\PY{n}{img\PYZus{}noise}\PY{p}{,}
+                             \PY{n}{iter\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{step}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{octave\PYZus{}n}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{octave\PYZus{}scale}\PY{o}{=}\PY{l+m+mf}{1.4}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{t\PYZus{}score} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{t\PYZus{}obj}\PY{p}{)} 
+            \PY{n}{t\PYZus{}grad} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gradients}\PY{p}{(}\PY{n}{t\PYZus{}score}\PY{p}{,} \PY{n}{t\PYZus{}input}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+            \PY{n}{img} \PY{o}{=} \PY{n}{img0}
+            \PY{n}{octaves} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{octave\PYZus{}n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{n}{hw} \PY{o}{=} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+                \PY{n}{lo} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{n}{hw}\PY{p}{)}\PY{o}{/}\PY{n}{octave\PYZus{}scale}\PY{p}{)}\PY{p}{)}
+                \PY{n}{hi} \PY{o}{=} \PY{n}{img}\PY{o}{\PYZhy{}}\PY{n}{resize}\PY{p}{(}\PY{n}{lo}\PY{p}{,} \PY{n}{hw}\PY{p}{)}
+                \PY{n}{img} \PY{o}{=} \PY{n}{lo}
+                \PY{n}{octaves}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hi}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{octave} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{octave\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{octave}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{hi} \PY{o}{=} \PY{n}{octaves}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{octave}\PY{p}{]}
+                    \PY{n}{img} \PY{o}{=} \PY{n}{resize}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{hi}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{n}{hi}
+                
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{iter\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{g} \PY{o}{=} \PY{n}{calc\PYZus{}grad\PYZus{}tiled}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{t\PYZus{}grad}\PY{p}{)}
+                    \PY{n}{img} \PY{o}{+}\PY{o}{=} \PY{n}{g}\PY{o}{*}\PY{p}{(}\PY{n}{step} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{g}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{1e\PYZhy{}7}\PY{p}{)}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{end} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{clear\PYZus{}output}\PY{p}{(}\PY{p}{)}
+                \PY{n}{showarray}\PY{p}{(}\PY{n}{img}\PY{o}{/}\PY{l+m+mf}{255.0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{img0} \PY{o}{=} \PY{n}{PIL}\PY{o}{.}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/michaelwisniewski/desktop/PythonProjects/DeepLearning/GoogleDream/TY.JPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{img0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{n}{img0}\PY{p}{)}
+         \PY{n}{showarray}\PY{p}{(}\PY{n}{img0}\PY{o}{/}\PY{l+m+mf}{255.0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{render\PYZus{}deepdream}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mixed4c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{img0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+. . . . . . 
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{img2} \PY{o}{=} \PY{n}{PIL}\PY{o}{.}\PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/michaelwisniewski/desktop/PythonProjects/DeepLearning/GoogleDream/Aedan.JPG}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{img2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{n}{img2}\PY{p}{)}
+        \PY{n}{showarray}\PY{p}{(}\PY{n}{img2}\PY{o}{/}\PY{l+m+mf}{255.0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{render\PYZus{}deepdream}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{T}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mixed4c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{img2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.jpeg}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
